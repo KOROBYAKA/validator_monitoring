@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from os import system
 from sys import exit
 
@@ -54,7 +55,7 @@ def test():
     net.stop()
 def main():
 
-   
+    system("systemctl  start ovs-vswitchd") #start OVS just in case   
 
     test()
 
