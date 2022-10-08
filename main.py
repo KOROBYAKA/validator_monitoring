@@ -43,11 +43,18 @@ def test():
         hA.cmd(f'sudo ip link add link hA-eth0 name hA-eth0.10{x} type vlan id 10{x}')
         hA.cmd(f'ip link set dev hA-eth0.10{x} up')
         hA.cmd(f'ip link set hA-eth0.10{x} master br0')
-        ''' ping po IP rabotaet hA.cmd(f'ip address add dev hA-eth0.10{x} 10.0.0.2{x}')'''
-    hA.cmd('ip address add dev br0 10.0.0.111/24')
-    hA.cmd('ip address add dev hA-eth0 10.0.0.11/24')
+        #''' ping po IP rabotaet hA.cmd(f'ip address add dev hA-eth0.10{x} 10.0.0.2{x}')'''
+    hA.cmd('ip address add dev br0 10.0.0.111/32')
+    #hA.cmd('ip address add dev hA-eth0 10.0.0.11/32')
     hA.cmd('ip link set br0 up')
     hA.cmd('ip link set hA-eth0 up')
+
+    hB = net['hB']
+    for x in range(0, 4):
+        hB.cmd(f'sudo ip link add link hB-eth{x} name hB-eth{x}.10{x} type vlan id 10{x}')
+        hB.cmd(f'ip address add dev hB-eth{x}.10{x} 10.0.0.2{x}')
+        hB.cmd(f'ip link set dev hB-eth{x}.10{x} up')
+
 
 
     CLI(net)
