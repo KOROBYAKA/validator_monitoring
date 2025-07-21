@@ -39,13 +39,13 @@ def main():
     parser.add_argument('loss_percentage')
     args = parser.parse_args()
     nodes = [Node("10.0.1.2","A","10.0.1.1")]
-    print("Creating server namespace with a single host")
+    #print("Creating server namespace with a single host")
     subprocess.run("./server.sh", shell=True)
     for x in range(1,int(args.hosts_amount)):
         name = get_label(x)
         link_delay = link_delays[(x//len(link_delays)-1)]
         delay_distribution = delay_distributions[(x//len(delay_distributions)-1)]
-        print(f"./client.sh {name} {x} {link_delay} {delay_distribution} {args.loss_percentage}")
+        #print(f"./client.sh {name} {x} {link_delay} {delay_distribution} {args.loss_percentage}")
         nodes.append(Node(f"10.0.1{x+2}",name,"10.0.1.1"))
         subprocess.run(f"./client.sh {name} {x+2} {link_delay} {delay_distribution} {args.loss_percentage}",shell=True)
 

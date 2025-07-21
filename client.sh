@@ -28,5 +28,5 @@ $SRV tc qdisc add dev veth_srv-${TARGET} parent 1: handle 2: netem loss ${LOSS_P
 
 $CLI tc qdisc add dev veth-${TARGET} root handle 1: netem delay ${DELAY_MS}ms ${DELAY_DISTRIBUTION_MS}ms distribution normal
 $CLI tc qdisc add dev veth-${TARGET} parent 1: handle 2: netem loss ${LOSS_PERCENT} rate 100Mbit corrupt 1% duplicate 1%
-echo 'Run "ip netns exec client ${TARGET} bash" to start a shell in namespace for accessing client-${TARGET}'
+echo "Run 'ip netns exec client $TARGET bash' to start a shell in namespace for accessing client-$TARGET"
 echo 'Internet access is not configured inside the namespaces.'
