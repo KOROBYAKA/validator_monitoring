@@ -32,13 +32,13 @@ def main():
     args = parser.parse_args()
 
     print("Creating server namespace with a single host")
-    subprocess.run("./ns.sh", shell=True)
-    for x in range(0,int(args.hosts_amount)):
+    subprocess.run("./server.sh", shell=True)
+    for x in range(1,int(args.hosts_amount)):
         name = get_label(x)
         link_delay = link_delays[(x//len(link_delays)-1)]
-        delay_distribution = delay_distributions[(x // len(delay_distributions) - 1)]
+        delay_distribution = delay_distributions[(x//len(delay_distributions)-1)]
         print(f"./client.sh {name} {x} {link_delay} {delay_distribution} {args.loss_percentage}")
-        subprocess.run(f"./client.sh {name} {x} {link_delay} {delay_distribution} {args.loss_percentage}",shell=True)
+        subprocess.run(f"./client.sh {name} {x+2} {link_delay} {delay_distribution} {args.loss_percentage}",shell=True)
 
     print("success")
 
