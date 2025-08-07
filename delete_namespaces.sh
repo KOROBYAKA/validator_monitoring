@@ -5,3 +5,6 @@ for ns in $(ip netns list | awk '{print $1}'); do
     ip netns del "$ns"
 done
 echo "All namespaces deleted"
+echo "Killing clients and server"
+killall client
+killall server

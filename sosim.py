@@ -1,7 +1,7 @@
 #!/bin/python3
 import subprocess
 import argparse
-
+import time
 
 class Node():
     def __init__(self, ip:str, label:str, target_ip:str):
@@ -11,8 +11,8 @@ class Node():
 
     def run_agave_client(self):
         cli = f"ip netns exec client{self.label}"
-        args = f"--target {self.target_ip}:8009 --duration 600 --num-connections 4"
-        proc = subprocess.Popen(f"{cli} ./mock_server/target/debug/client {args}",
+        args = f"--target {self.target_ip}:8009 --duration 4 --host-name {self.label}"
+        subprocess.Popen(f"{cli} ./mock_server/target/debug/client {args}",
                                 shell=True, text=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
                                 )
 
@@ -54,18 +54,17 @@ def main():
     #run mock-server
     cli = f"ip netns exec server"
     args = f"--listen 10.0.1.1:8009 --receive-window-size 630784  --max-concurrent-streams 512 --stream-receive-window-size 1232"
-    proc = subprocess.Popen(f"{cli} ./mock_server/target/debug/server {args}",
+    server = subprocess.Popen(f"{cli} ./mock_server/target/debug/server {args}",
         shell=True, text=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
     )
 
     for node in nodes:
         node.run_agave_client()
 
-
-
+    time.sleep(7)
+    server.kill()
 
 
 
 if __name__ == '__main__':
     main()
-

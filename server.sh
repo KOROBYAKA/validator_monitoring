@@ -5,6 +5,9 @@ LOSS_PERCENT=1
 CLIA="ip netns exec clientA"
 SRV="ip netns exec server"
 
+echo "Creating a directory for result"
+mkdir results
+
 echo "Cleanup, ignore errors if this is first run"
 ip netns del clientA
 ip netns del server
@@ -42,5 +45,3 @@ $CLIA tc qdisc add dev veth-A parent 1: handle 2: netem loss ${LOSS_PERCENT} rat
 
 echo 'Run "ip netns exec server bash" to start a shell in namespace for SERVER'
 echo 'Internet access is not configured inside the namespaces.'
-
-

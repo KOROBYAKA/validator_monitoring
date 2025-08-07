@@ -19,7 +19,7 @@ $SRV ip link set veth_srv-${TARGET} up
 $CLI ip a a 10.0.1.${TARGET_IP}/24 dev veth-${TARGET}
 $CLI ip link set veth-${TARGET} up
 echo "Connectivity check"
-$CLI ping 10.0.1.1 -c 1 -W 0.00001
+$CLI ping 10.0.1.1 -c 1 -W 0.00001 >> /dev/null
 
 echo "Set host ${TARGET} link quality"
 echo "Set delay of ${DELAY_MS}ms, packet loss ${LOSS_PERCENT}%"
