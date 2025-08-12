@@ -1,1 +1,2 @@
-Run:sudo ./sosim.py [args]
+Run:
+sudo ./sosim.py [args]
