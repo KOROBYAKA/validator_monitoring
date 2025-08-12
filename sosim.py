@@ -11,7 +11,7 @@ class Node():
 
     def run_agave_client(self):
         cli = f"ip netns exec client{self.label}"
-        args = f"--target {self.target_ip}:8009 --duration 4 --host-name {self.label}"
+        args = f"--target {self.target_ip}:8009 --duration 3.3 --host-name {self.label}"
         subprocess.Popen(f"{cli} ./mock_server/target/debug/client {args}",
                                 shell=True, text=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
                                 )
