@@ -43,5 +43,5 @@ $SRV tc qdisc add dev veth_srv-A parent 1: handle 2: netem loss ${LOSS_PERCENT}
 $CLIA tc qdisc add dev veth-A root handle 1: netem delay ${DELAY_MS}ms ${DELAY_DISTRIBUTION_MS}ms distribution normal
 $CLIA tc qdisc add dev veth-A parent 1: handle 2: netem loss ${LOSS_PERCENT} rate 100Mbit corrupt 1% duplicate 1%
 
-echo 'Run "ip netns exec server bash" to start a shell in namespace for SERVER'
-echo 'Internet access is not configured inside the namespaces.'
+#echo 'Run "ip netns exec server bash" to start a shell in namespace for SERVER'
+#echo 'Internet access is not configured inside the namespaces.'
