@@ -52,21 +52,26 @@ def main():
         subprocess.run(f"./client.sh {name} {x+2} {link_delay} {delay_distribution} {args.loss_percentage}",shell=True)
 
 
-    print("Environment is up.\nRunning a server")
+    print("Environment is up")
     #run mock-server
     cli = f"ip netns exec server"
     args = f"--listen 10.0.1.1:8009 --receive-window-size 630784  --max-concurrent-streams 512 --stream-receive-window-size 1232"
     server = subprocess.Popen(f"{cli} ./mock_server/target/debug/server {args}",
         shell=True, text=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
     )
+    print("Server is up")
 
     for node in nodes:
         node.run_agave_client()
+    print("Clients are up")
 
-    time.sleep(7)
+    time.sleep(3.5)
     server.kill()
-
+    print("Server killed")
     subprocess.run("chmod 666 ./results/*", shell=True, text=True)
+    print("Results are stored in directory ./results")
+
+    subprocess.run("python3 ./UDP-parse/main.py",shell=True, text= True)
 
 
 if __name__ == '__main__':

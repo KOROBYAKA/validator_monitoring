@@ -1,3 +1,6 @@
 [submodule "mock_server"]
 	path = mock_server
 	url = git@github.com:KOROBYAKA/mock-server-solana.git
+[submodule "UDP-parse"]
+	path = UDP-parse
+	url = git@github.com:donneyeel/UDP-parse.git
